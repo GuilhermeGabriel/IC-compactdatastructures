@@ -1,29 +1,21 @@
 #include <stdio.h>
 #include <math.h>
 
-unsigned int n=10,l=5,w=32,W[2];
-
-int pot(int b,int ex){
- return pow(b,ex);
-}
+int n=10,l=5,w=32;
+unsigned int W[2];
 
 int bitRead(unsigned int *W, int j){
-	int r=((j-1)%w)+1;
-	return (W[j/w]/pot(2,w-r))%2;
+	return (W[j/w]/(1<<w-(((j-1)%w)+1)))%2;
 }
 
 void bitSet(unsigned int *W, int j){
-	int r=((j-1)%w)+1;
-	if((W[j/w]/pot(2,w-r)%2)==0){
-		W[j/w]+=pot(2,w-r);
-	}
+	if((W[j/w]/(1<<w-(((j-1)%w)+1))%2)==0)
+		W[j/w]+=(1<<w-(((j-1)%w)+1));
 }
 
 void bitClear(int *W, int j){
-	int r=((j-1)%w)+1;
-	if((W[(j/w)]/pot(2,w-r)%2)==1){
-		W[(j/w)]-=pot(2,w-r);
-	}
+	if((W[(j/w)]/(1<<w-(((j-1)%w)+1))%2)==1)
+		W[(j/w)]-=(1<<w-(((j-1)%w)+1));
 }
 
 int main(){
