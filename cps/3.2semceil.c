@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <math.h>
 
 int n=10,l=5,w=32;
 unsigned int W[2];
